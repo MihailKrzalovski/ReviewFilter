@@ -1,0 +1,68 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+
+</head>
+<body>
+<h1>Filter reviews</h1>
+<form th:action = "@{'/reviews'}"  th:method="GET">
+<label for="rateSort">Order by rating:</label>
+<br>
+<select name="rateSort" id="rateSort" >
+    <option th:value="highestFirst">Highest First</option>
+    <option th:value="lowestFirst">Lowest First</option>
+</select>
+<br>
+
+<label for="minRatings">Minimum rating:</label>
+<br>
+<select name="minRatings" id="minRatings">
+    <option th:value="1">1</option>
+    <option th:value="2">2</option>
+    <option th:value="3">3</option>
+    <option th:value="4">4</option>
+    <option th:value="5">5</option>
+
+</select>
+<br>
+
+<label for="dateSort">Order by date:</label>
+<br>
+<select name="dateSort" id="dateSort">
+    <option th:value="oldestFirst">Oldest first</option>
+    <option th:value="newestFirst">Newest first</option>
+
+</select>
+<br>
+
+<label for="textPrioritize">Prioritize by text:</label>
+<br>
+<select name="textPrioritize" id="textPrioritize">
+    <option th:value="yes">Yes</option>
+    <option th:value="no">No</option>
+
+</select>
+<br>
+ <button type="submit" value="Filter"> Filter </button> </form>
+<br>
+<table>
+    <thead>
+    <tr>
+        <th> Id </th>
+        <th> Full text </th>
+        <th> Rating </th>
+        <th> Date created on </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="review : ${reviews}">
+        <td><span th:text="${review.id}"> Id </span></td>
+        <td><span th:text="${review.reviewFullText}"> FullText </span></td>
+        <td><span th:text="${review.rating}"> Rating </span></td>
+        <td><span th:text="${review.reviewCreatedOnDate}"> Date </span></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
